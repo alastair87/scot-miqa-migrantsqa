@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Container, Loader, Divider } from "semantic-ui-react";
 import QuestionsList from "./QuestionsList";
-import AnswersList from "./AnswersList";
 import AddQuestion from "./AddQuestion";
 import { getQuestions } from "../api/questions";
 import { getAnswers } from "../api/answers";
