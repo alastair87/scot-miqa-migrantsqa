@@ -9,7 +9,7 @@ export default class AddQuestion extends Component {
     content: "",
     tags,
     isAnswered: null,
-    score: null,
+    score: 0,
     userId: ""
   };
 
