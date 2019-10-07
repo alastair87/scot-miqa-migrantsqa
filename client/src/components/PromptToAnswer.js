@@ -2,11 +2,11 @@ import React from "react";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-const LoginPrompt = () => (
-  <Modal trigger={<Button>Add a question </Button>} basic size="small">
-    <Header icon="warning" content="Adding a question" />
+const PromptToAnswer = () => (
+  <Modal trigger={<Button>Add an Answer</Button>} basic size="small">
+    <Header icon="warning" content="Adding an answer" />
     <Modal.Content>
-      <p>Please Register/Login to add a question.</p>
+      <p>Please Register/Login to add an answer.</p>
     </Modal.Content>
     <Modal.Actions>
       <Button basic color="green" inverted as={Link} to="/login">
@@ -19,4 +19,4 @@ const LoginPrompt = () => (
   </Modal>
 );
 
-export default LoginPrompt;
+export default PromptToAnswer;

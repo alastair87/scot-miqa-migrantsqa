@@ -1,6 +1,6 @@
 import React from "react";
 import AnswerCard from "./AnswersCard";
-import LoginPrompt from "./LoginPrompt";
+import PromptToAnswer from "./PromptToAnswer";
 import { Form, Accordion } from "semantic-ui-react";
 
 const AnswersList = props => {
@@ -33,7 +33,7 @@ const AnswersList = props => {
           <Form.Button>Submit</Form.Button>
         </Form>
       ) : (
-        <LoginPrompt />
+        <PromptToAnswer />
       )}
     </Accordion.Content>
   );
