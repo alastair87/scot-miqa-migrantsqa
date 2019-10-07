@@ -72,6 +72,7 @@ const QuestionCard = props => {
               handleOnSubmitAnswer={props.handleOnSubmitAnswer}
               handleChange={props.handleChange}
               content={props.content}
+              userId={props.userId}
             />
           </Accordion>
         </Card.Header>
