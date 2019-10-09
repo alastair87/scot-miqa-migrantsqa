@@ -116,29 +116,6 @@ const QuestionCard = props => {
                       </div>
                     </Card.Content>
                   ) : null}
-                  {/* </Accordion.Title> */}
-
-                  <AnswersList
-                    answers={props.answers}
-                    question={question}
-                    activeIndex={props.activeIndex}
-                    handleOnSubmitAnswer={props.handleOnSubmitAnswer}
-                    handleChange={props.handleChange}
-                    content={props.content}
-                    userId={props.userId}
-                  />
-                  {/* </Accordion>
-        </Card.Header> */}
-                  <QuestionUpvote
-                    userId={props.userId}
-                    questionUserId={question.user_id}
-                    questionScore={question.score}
-                    questionId={question.id}
-                    handleOnClickUpvoteBtn={() =>
-                      props.handleOnClickUpvoteBtn(question, props.userId)
-                    }
-                  />
-
                   <Card.Meta
                     textAlign="left"
                     style={{
