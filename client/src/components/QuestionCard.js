@@ -48,7 +48,15 @@ const QuestionCard = props => {
           handleOnClickUpvoteBtn={() =>
             props.handleOnClickUpvoteBtn(question, props.userId)
           }
-        /></Grid.Column>
+        />
+        <Card.Meta textAlign="right">
+          {
+            props.answers.filter(answer => answer.question_id === question.id)
+              .length
+          }
+          answers
+        </Card.Meta>
+        </Grid.Column>
           <Grid.Column textAlign="left" width={9}>
               {props.editQuestion && props.editQuestion.id === question.id ? (
                 <Form>
