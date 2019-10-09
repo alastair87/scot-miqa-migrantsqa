@@ -88,7 +88,7 @@ export default class MenuBar extends Component {
               onClick={this.handleLogout}
             />
             {this.props.userId ? (
-              <Image src={this.state.profilePicUrl} size="mini" style={{ width: "50px" }} />
+              <Image src={this.state.profilePicUrl} size="mini" style={{ maxWidth: "60px", width: "100%" }} />
             ) : (
               ""
             )}
