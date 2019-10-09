@@ -13,7 +13,6 @@ const AnswersList = props => {
     content,
     userId
   } = props;
-  console.log(props);
   return (
     <Accordion.Content active={activeIndex === question.id}>
       {answers.map(answer => {

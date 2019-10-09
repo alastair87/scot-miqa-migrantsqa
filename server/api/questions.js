@@ -7,6 +7,17 @@ const { authMiddleware } = require("../auth/passport");
 /**
  * Get Questions
  */
+
+router.get("/questionTags", (req, res) => {
+  questionDb
+    .getQuestionsTags()
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.sendStatus(500);
+    });
+});
 // get questions for profile
 router.get("/:id/Profile", (req, res) => {
   const { id } = req.params;
@@ -47,17 +58,6 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/questionTags", (req, res) => {
-  questionDb
-    .getQuestionsTags()
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-});
 /**
  * Post Questions
  */
