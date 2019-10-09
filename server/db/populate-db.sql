@@ -6,6 +6,7 @@ INSERT INTO users (username,email,password,profile_pic) values ('user','user@cyf
 insert into users (username,email,password,profile_pic) values('reyam','reyam@gmail.com','123455','https://image.flaticon.com/icons/png/512/145/145987.png');
 insert into users (username,email,password,profile_pic) values('ahmed','ahmed@gmail.com','73635','https://www.shareicon.net/download/2016/09/01/822711_user_512x512.png');
 insert into users (username,email,password,profile_pic) values('zan','zan@gmail.com','2516722', 'https://image.flaticon.com/icons/png/512/145/145987.png');
+INSERT INTO users (username,email,password,profile_pic) values ('irina','irinapreda91@gmail.com', 'Miqa123','https://i.ibb.co/8zcwqqn/ymt-ZEu-t-400x400.jpg');
 
 INSERT INTO questions (content,date_posted,tags,is_answered,score,user_id) values('My friend is at risk of eviction, anyone aware of any organisations that can help her in regard to the Serco evictions?','2019-04-11',ARRAY['immigrantion'],false,4,5);
 INSERT INTO questions (content,date_posted,tags,is_answered,score,user_id) values('When interviewing arrivals seeking entry, what questions do UK Immigration offices ask?','2019-03-12',ARRAY['immigrantion'],false,2,4);
@@ -19,6 +20,12 @@ INSERT INTO questions (content,date_posted,tags,is_answered,score,user_id) value
 INSERT INTO questions (content,date_posted,tags,is_answered,score,user_id) values('Feeling homesick for my favourite food! Any good East African restaurants in Glasgow?','2019-04-20',ARRAY['food'],false,0,4);
 INSERT INTO questions (content,date_posted,tags,is_answered,score,user_id) values('Can I bring my spouse to my GP appointment?','2019-04-20',ARRAY['doctor'],false,0,1);
 
+INSERT INTO answers (content,date_answered,tags,is_accepted,score,question_id,user_id) values('Answer text11 ','2013-12-10','paper',false,4,1,1);
+INSERT INTO answers (content,date_answered,tags,is_accepted,score,question_id,user_id) values('Answer text12 ','2015-02-21','paper',false,4,1,2);
+INSERT INTO answers (content,date_answered,tags,is_accepted,score,question_id,user_id) values('Answer text21 ','2014-07-27','paper',false,4,2,3);
+INSERT INTO answers (content,date_answered,tags,is_accepted,score,question_id,user_id) values('Answer text22 ','2018-04-12','paper',false,4,2,1);
+INSERT INTO answers (content,date_answered,tags,is_accepted,score,question_id,user_id) values('Answer text31 ','2019-06-08','paper',false,4,3,2);
+INSERT INTO answers (content,date_answered,tags,is_accepted,score,question_id,user_id) values('Answer text32 ','2019-04-21','paper',false,4,3,3);
 INSERT INTO answers (content,date_answered,tags,is_accepted,score,question_id,user_id) values('De la vaca :)','2019-09-10','',false,0,5,1);
 INSERT INTO answers (content,date_answered,tags,is_accepted,score,question_id,user_id) values('There is no prescribed set of questions; the IO will be trying to determine if you qualify as a visitor under Appendix V of the rules. So a full interview will cover purpose, length, maintenance, accommodation, returnability, and overstay risk.','2015-09-21','',true,2,2,2);
 INSERT INTO answers (content,date_answered,tags,is_accepted,score,question_id,user_id) values('The Romanian Orthodox Church in Glasgow meets in the halls of Shettleston Old Parish Church. ','2019-09-27','',false,0,4,2);

@@ -7,9 +7,10 @@ import {
   Accordion,
   Icon,
   Popup,
-  Image
+  Image,
+  Grid,
+  Label
 } from "semantic-ui-react";
-import { formatingDate } from "../util/formatingDate";
 import AnswersList from "./AnswersList";
 import QuestionUpvote from "./QuestionUpvote";
 import { Link } from "react-router-dom";
@@ -17,7 +18,12 @@ import { Link } from "react-router-dom";
 const QuestionCard = props => {
   const { question, index } = props;
   return (
-    <Card data-testid="question" fluid key={question.id}>
+    <Card
+      data-testid="question"
+      fluid
+      key={question.id}
+      style={{ padding: "1em" }}
+    >
       <Card.Content>
         <Popup
           content="Expand"
@@ -36,52 +42,132 @@ const QuestionCard = props => {
               onClick={props.toggleAnswers}
               id={`card-${index}`}
             >
-              {props.editQuestion && props.editQuestion.id === question.id ? (
-                <Form>
-                  <TextArea
-                    value={props.editContentQuestion}
-                    style={{ minHeight: 100 }}
-                    onChange={e => props.onChange(e)}
+              <Grid columns={3}>
+                <Grid.Column textAlign="left" width={2}>
+                  <QuestionUpvote
+                    userId={props.userId}
+                    questionUserId={question.user_id}
+                    questionScore={question.score}
+                    questionId={question.id}
+                    handleOnClickUpvoteBtn={() =>
+                      props.handleOnClickUpvoteBtn(question, props.userId)
+                    }
                   />
-                  <div className="ui two buttons">
-                    <Button onClick={props.handleSaveClick} basic color="green">
-                      Save
-                    </Button>
-                    <Button
-                      data-testid="cancel-button"
-                      onClick={props.handleCancelClick}
-                      basic
-                      color="gray"
-                    >
-                      Cancel
-                    </Button>
-                  </div>
-                </Form>
-              ) : (
-                question.content
-              )}
-              {props.userId === question.user_id && !props.editQuestion ? (
-                <Card.Content extra>
-                  <div className="ui two buttons">
-                    <Button
-                      basic
-                      color="green"
-                      onClick={event => props.handleEditClick(question, event)}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      basic
-                      color="red"
-                      onClick={event =>
-                        props.handleDeleteClick(question, event)
-                      }
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                </Card.Content>
-              ) : null}
+                  <Card.Meta style={{ fontSize: "0.9em" }}>
+                    {
+                      props.answers.filter(
+                        answer => answer.question_id === question.id
+                      ).length
+                    }{" "}
+                    answers
+                  </Card.Meta>
+                </Grid.Column>
+                <Grid.Column textAlign="left" width={9}>
+                  {props.editQuestion &&
+                  props.editQuestion.id === question.id ? (
+                    <Form>
+                      <TextArea
+                        value={props.editContentQuestion}
+                        style={{ minHeight: 100 }}
+                        onChange={e => props.onChange(e)}
+                      />
+                      <div className="ui two buttons" style={{ width: "40%" }}>
+                        <Button
+                          onClick={props.handleSaveClick}
+                          basic
+                          color="black"
+                        >
+                          Save
+                        </Button>
+                        <Button
+                          data-testid="cancel-button"
+                          onClick={props.handleCancelClick}
+                          basic
+                          color="black"
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                    </Form>
+                  ) : (
+                    question.content
+                  )}
+                  {props.userId === question.user_id && !props.editQuestion ? (
+                    <Card.Content extra>
+                      <div className="ui two buttons" style={{ width: "40%" }}>
+                        <Button
+                          basic
+                          color="black"
+                          onClick={event =>
+                            props.handleEditClick(question, event)
+                          }
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          basic
+                          color="black"
+                          onClick={event =>
+                            props.handleDeleteClick(question, event)
+                          }
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </Card.Content>
+                  ) : null}
+                  {/* </Accordion.Title> */}
+
+                  <AnswersList
+                    answers={props.answers}
+                    question={question}
+                    activeIndex={props.activeIndex}
+                    handleOnSubmitAnswer={props.handleOnSubmitAnswer}
+                    handleChange={props.handleChange}
+                    content={props.content}
+                    userId={props.userId}
+                  />
+                  {/* </Accordion>
+        </Card.Header> */}
+                  <QuestionUpvote
+                    userId={props.userId}
+                    questionUserId={question.user_id}
+                    questionScore={question.score}
+                    questionId={question.id}
+                    handleOnClickUpvoteBtn={() =>
+                      props.handleOnClickUpvoteBtn(question, props.userId)
+                    }
+                  />
+
+                  <Card.Meta
+                    textAlign="left"
+                    style={{
+                      fontStyle: "italic",
+                      marginTop: "0.5em"
+                    }}
+                  >
+                    {question.tags &&
+                      question.tags.map(
+                        (tag, index) =>
+                          //This line will add a #followed by the tag and
+                          //keep adding spaces till we reach the end of the array.
+
+                          `#${tag}${
+                            index === question.tags.length - 1 ? "" : ` `
+                          }`
+                      )}
+                  </Card.Meta>
+                </Grid.Column>
+                <Grid.Column textAlign="right" width={5}>
+                  <Card.Meta textAlign="right">
+                    <Label as="a" image>
+                      <img src="https://react.semantic-ui.com/images/avatar/small/nan.jpg" />
+                      {"  "}
+                      {question.username}
+                    </Label>
+                  </Card.Meta>
+                </Grid.Column>
+              </Grid>
             </Accordion.Title>
 
             <AnswersList
@@ -91,39 +177,10 @@ const QuestionCard = props => {
               handleOnSubmitAnswer={props.handleOnSubmitAnswer}
               handleChange={props.handleChange}
               content={props.content}
-              userId={props.userId}
+              handleAcceptAnswerOnClick={props.handleAcceptAnswerOnClick}
             />
           </Accordion>
         </Card.Header>
-        <QuestionUpvote
-          userId={props.userId}
-          questionUserId={question.user_id}
-          questionScore={question.score}
-          questionId={question.id}
-          handleOnClickUpvoteBtn={() =>
-            props.handleOnClickUpvoteBtn(question, props.userId)
-          }
-        />
-        <Card.Meta
-          textAlign="right"
-          style={{
-            fontSize: "12px",
-            fontStyle: "italic"
-          }}
-        >
-          {question.tags &&
-            question.tags.map(
-              (tag, index) =>
-                //This line will add a #followed by the tag and
-                //keep adding spaces till we reach the end of the array.
-
-                `#${tag}${index === question.tags.length - 1 ? "" : ` `}`
-            )}
-        </Card.Meta>
-        <Card.Meta textAlign="right">
-          {formatingDate(question.date_posted)}
-        </Card.Meta>
-        <Card.Meta textAlign="right"> by {question.username}</Card.Meta>
       </Card.Content>
     </Card>
   );
