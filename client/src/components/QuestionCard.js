@@ -49,12 +49,12 @@ const QuestionCard = props => {
             props.handleOnClickUpvoteBtn(question, props.userId)
           }
         />
-        <Card.Meta textAlign="right">
+        <Card.Meta style={{fontSize: "0.9em"}}>
           {
             props.answers.filter(answer => answer.question_id === question.id)
               .length
           }
-          answers
+          {" "}answers
         </Card.Meta>
         </Grid.Column>
           <Grid.Column textAlign="left" width={9}>
