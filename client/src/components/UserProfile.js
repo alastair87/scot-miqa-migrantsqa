@@ -83,8 +83,8 @@ export default class UserProfile extends Component {
             don't have any questions and link to home page to aks his first one */}
             {questions && questions.length === 0 ? (
               <Header as="h3">
-                You didn't Ask any question{" "}
-                <Link to={"/"}>Ask Your first question</Link>
+                You haven't asked any questions yet ...{"\n"}
+                <Link to={"/"}>Want to ask your first question?</Link>
               </Header>
             ) : (
               questions &&
