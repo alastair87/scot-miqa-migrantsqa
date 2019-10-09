@@ -70,7 +70,6 @@ export default class MenuBar extends Component {
             as={Link}
             to="/about"
           />
-
           {this.props.userId ? (
             <Menu.Menu position="right">
               <Menu.Item
