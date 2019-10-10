@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Segment, Header, Button, TextArea, Card } from "semantic-ui-react";
+import { Segment, Header, Button, TextArea } from "semantic-ui-react";
 import { postAnswer, updateScore } from "../api/questions";
 import { getAnswersByQuestionId } from "../api/answers";
 import { getQuestionByQuestionId } from "../api/questions";
