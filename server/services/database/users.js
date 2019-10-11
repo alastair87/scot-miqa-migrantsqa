@@ -105,12 +105,13 @@ const changeProfilePic = (newPictureLink, userId) => {
       `UPDATE
       users
        SET 
-      profile_pic = ${newPictureLink}
+      profile_pic = $1
       WHERE 
-      id =${userId}`,
+      id =$2`,
+      [newPictureLink, userId],
       (error, result) => {
         if (error) {
-          console.error("ss",error);
+          console.error("ss", error);
           return reject(error);
         }
         console.log(result);

@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/:userId", (req, res) => {
+router.get("/:userId([0-9]+)", (req, res) => {
   let id = req.params.userId;
   usersDb
     .getUserById(id)
@@ -30,11 +30,11 @@ router.get("/:userId", (req, res) => {
     });
 });
 router.put(`/change-Profile-Pic`, (req, res) => {
-  const { userId, newPicLink } = req.body;
+  const { newPictureLink, userId } = req.body;
   usersDb
-    .changeProfilePic(newPicLink, userId)
+    .changeProfilePic(newPictureLink, userId)
     .then(data => {
-      res.send(data);
+      res.send({ success: true });
     })
     .catch(err => {
       console.error(err);
