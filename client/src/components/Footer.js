@@ -39,7 +39,7 @@ const Footer = () => {
               position="right"
               target="_blank"
             >
-              <Icon link color="inverted" name="github" size="huge" />
+              <Icon link inverted name="github" size="huge" />
             </Item>
           </Grid.Column>
           <Grid.Column width={3}>
