@@ -6,19 +6,26 @@ import {
   CardHeader,
   Card,
   Segment,
-  Item
+  Item,
+  Modal,
+  Button,
+  Form,
+  Input
 } from "semantic-ui-react";
 import { getQuestionsByUserIdForProfilePage } from "../api/questions";
 import { Link } from "react-router-dom";
 import { formatingDate } from "../util/formatingDate";
 import { getUsersDataByUserId } from "../api/users";
+import { changeProfilePic } from "../api/users";
 import OptionsButton from "./OptionsButton";
 
 export default class UserProfile extends Component {
   state = {
     userId: localStorage.getItem("userId"),
     user: [],
-    questions: []
+    questions: [],
+    openChangeProfilePicture: false,
+    newPictureLink: ""
   };
 
   // Get data
@@ -27,7 +34,8 @@ export default class UserProfile extends Component {
     getUsersDataByUserId(this.state.userId)
       .then(data => {
         this.setState({
-          user: data
+          user: data,
+          newPictureLink: data.profile_pic
         });
       })
       .catch(error => {
@@ -47,15 +55,37 @@ export default class UserProfile extends Component {
     this.getUserData();
   }
 
+  //Handlers
+  openPictureAddition = () => () =>
+    this.setState({ openChangeProfilePicture: true });
+  close = () => this.setState({ openChangeProfilePicture: false });
+
+  handleChangeProfilePic = e => {
+    this.setState({ newPictureLink: e.target.value });
+    this.openPictureAddition();
+  };
+
+  handlePostNewProfilePic = () => {
+    const { userId, newPictureLink } = this.state;
+    changeProfilePic({ newPictureLink, userId });
+    this.close();
+    window.location.reload();
+  };
+
   render() {
-    const { questions, user } = this.state;
+    const { questions, user, openChangeProfilePicture } = this.state;
     return (
       <Segment>
-        <Grid columns={3} centered  style={{margin: '1em'}}>
+        <Grid columns={3} centered style={{ margin: "1em" }} stackable>
           <Grid.Column textAlign="center" width={3}></Grid.Column>
           <Grid.Column textAlign="center" width={4}>
-            <OptionsButton changePassword />
+            <OptionsButton
+              changePassword
+              ChangeProfilePicture
+              openPictureAddition={this.openPictureAddition()}
+            />
             <Image
+              onClick={this.openPictureAddition()}
               src={user.profile_pic}
               centered
               size="small"
@@ -63,13 +93,14 @@ export default class UserProfile extends Component {
             ></Image>
             <Grid centered>
               <Grid.Row>
-                <Header as="h4" color="brown" textAlign="left" style={{margin: '2em'}}>
-                  <Item>
-                  Username: {user.username && user.username}
-                  </Item>
-                  <Item>
-                  Email: {user.email}
-                  </Item>
+                <Header
+                  as="h4"
+                  color="brown"
+                  textAlign="left"
+                  style={{ margin: "2em" }}
+                >
+                  <Item>Username: {user.username && user.username}</Item>
+                  <Item>Email: {user.email}</Item>
                 </Header>
               </Grid.Row>
             </Grid>
@@ -90,13 +121,13 @@ export default class UserProfile extends Component {
               questions &&
               questions.map(question => (
                 <Grid.Row>
-                  <Grid.Column 
+                  <Grid.Column
                     textAlign="left"
                     width={15}
                     as={Link}
                     to={`/question/${question.id}`}
                   >
-                    <Card fluid style={{padding: '1em'}}>
+                    <Card fluid style={{ padding: "1em" }}>
                       <CardHeader as="h4" textAlign="left">
                         {question.content}
                       </CardHeader>
@@ -112,6 +143,35 @@ export default class UserProfile extends Component {
           </Grid.Column>
           <Grid.Column textAlign="center" width={3}></Grid.Column>
         </Grid>
+        <Modal open={openChangeProfilePicture} onClose={this.close}>
+          <Modal.Header>Add Link To your Profile Picture</Modal.Header>
+          <Modal.Content image>
+            <Image wrapped size="small" src={this.state.newPictureLink} />
+            <Modal.Description style={{ width: "100%" }}>
+              <Form onSubmit={this.handlePostNewProfilePic}>
+                <Form.Field
+                  required
+                  label="Link For New Profile Picture"
+                  style={{ width: "100%" }}
+                  control={Input}
+                  onChange={this.handleChangeProfilePic}
+                ></Form.Field>
+              </Form>
+            </Modal.Description>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color="black" onClick={this.close}>
+              Cancel
+            </Button>
+            <Button
+              positive
+              icon="checkmark"
+              labelPosition="right"
+              content="Accept Changes"
+              onClick={this.handlePostNewProfilePic}
+            />
+          </Modal.Actions>
+        </Modal>
       </Segment>
     );
   }
