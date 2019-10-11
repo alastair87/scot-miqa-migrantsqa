@@ -111,7 +111,6 @@ const changeProfilePic = (newPictureLink, userId) => {
       [newPictureLink, userId],
       (error, result) => {
         if (error) {
-          console.error("ss", error);
           return reject(error);
         }
         console.log(result);
