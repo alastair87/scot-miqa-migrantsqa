@@ -67,9 +67,16 @@ export default class UserProfile extends Component {
 
   handlePostNewProfilePic = () => {
     const { userId, newPictureLink } = this.state;
-    changeProfilePic({ newPictureLink, userId });
-    this.close();
-    window.location.reload();
+    changeProfilePic({ newPictureLink, userId })
+      .then(result => {
+        if (result.status === 200) {
+          this.getUserData();
+          this.close();
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 
   render() {
