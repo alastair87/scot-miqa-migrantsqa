@@ -78,7 +78,7 @@ export default class QuestionsList extends Component {
           <centered>
           <h2>Hey ${username}</h2>
           <h3>Your question has a new answer:</h3>
-          <h4><a href="https://miqa.herokuapp.com/question/54">
+          <h4><a href="https://miqa.herokuapp.com/question/${questionId}">
           https://miqa.herokuapp.com/question/${questionId}</a></h4>
           <br>
           <p>All the best,</p>
