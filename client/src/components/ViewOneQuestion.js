@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Segment, Header, Button, TextArea } from "semantic-ui-react";
+import { Segment, Header, Button, TextArea, Form } from "semantic-ui-react";
 import { postAnswer, updateScore } from "../api/questions";
 import { getAnswersByQuestionId } from "../api/answers";
 import { getQuestionByQuestionId } from "../api/questions";
@@ -33,7 +33,7 @@ export default class ViewOneQuestion extends Component {
     updateScore(score, question.id)
       .then(result => {
         if (result.status === 200) {
-          window.location.reload();
+          this.getQuestion();
         }
       })
       .catch(err => {
@@ -57,10 +57,10 @@ export default class ViewOneQuestion extends Component {
     postAnswer(content, tags, questionId)
       .then(result => {
         if (result.status === 200) {
-          window.location.reload();
           this.setState({
             content: ""
           });
+          this.getAnswers();
         }
       })
       .catch(err => {
@@ -68,7 +68,7 @@ export default class ViewOneQuestion extends Component {
       });
   };
   render() {
-    const { question, answers } = this.state;
+    const { question, answers, content } = this.state;
     const {
       props,
       handleOnClickUpvoteBtn,
@@ -76,43 +76,44 @@ export default class ViewOneQuestion extends Component {
       handleChange
     } = this;
     return (
-      <React.Fragment>
-        <Segment>
-          <Header>{question.content}</Header>
-          <QuestionUpvote
-            userId={this.props.userId}
-            questionUserId={question.user_id}
-            questionScore={question.score}
-            questionId={question.id}
-            handleOnClickUpvoteBtn={() =>
-              handleOnClickUpvoteBtn(question, props.userId)
-            }
-          />
-          <p style={{ textAlign: "right", color: "grey" }}>
-            {question.tags &&
-              question.tags.map(
-                (tag, index) =>
-                  //This line will add a #followed by the tag and
-                  //keep adding spaces till we reach the end of the array.
+      <Segment>
+        <Header>{question.content}</Header>
+        <QuestionUpvote
+          userId={props.userId}
+          questionUserId={question.user_id}
+          questionScore={question.score}
+          questionId={question.id}
+          handleOnClickUpvoteBtn={() =>
+            handleOnClickUpvoteBtn(question, props.userId)
+          }
+        />
+        <p style={{ textAlign: "right", color: "grey" }}>
+          {question.tags &&
+            question.tags.map(
+              (tag, index) =>
+                //This line will add a #followed by the tag and
+                //keep adding spaces till we reach the end of the array.
 
-                  `#${tag}${index === question.tags.length - 1 ? "" : ` `}`
-              )}
-            <br></br>
-            {formatingDate(question.date_posted)}
-            <br></br>
-            by {question.username}
-          </p>
-          {answers.map(answer => {
-            return <AnswerCard question={question} answer={answer} />;
-          })}
-
+                `#${tag}${index === question.tags.length - 1 ? "" : ` `}`
+            )}
+          <br></br>
+          {formatingDate(question.date_posted)}
+          <br></br>
+          by {question.username}
+        </p>
+        {answers.map(answer => (
+          <AnswerCard key={answer.id} question={question} answer={answer} />
+        ))}
+        <Form onSubmit={handleOnSubmitAnswer}>
           <TextArea
             style={{ minHeight: 100, width: "95%" }}
             onChange={handleChange}
+            value={content}
+            required
           />
-          <Button onClick={handleOnSubmitAnswer}>Submit</Button>
-        </Segment>
-      </React.Fragment>
+          <Button>Submit</Button>
+        </Form>
+      </Segment>
     );
   }
 }

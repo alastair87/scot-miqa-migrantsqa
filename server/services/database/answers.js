@@ -52,12 +52,18 @@ const acceptAnswer = (questionId, isAccepted, id) => {
 
 // get Answers of question By Question id
 const getAnswerByQuestionId = id => {
+  console.log("id", id);
   return new Promise((resolve, reject) => {
     pool.query(
-      `select users.id as user_id, users.username, tmp.id as question_id, answers.content, answers.date_answered
-            from (select * from questions order by date_posted desc limit 10) as tmp
-            inner join answers on tmp.id = answers.question_id
-            inner join users on users.id = answers.user_id 
+      `SELECT 
+      users.id as user_id,
+      users.username,
+      answers.content,
+      answers.date_answered,
+      answers.question_id
+       FROM 
+       answers  
+      INNER JOIN users ON users.id = answers.user_id 
       WHERE question_id =${id}`,
 
       (error, result) => {
@@ -69,12 +75,10 @@ const getAnswerByQuestionId = id => {
         resolve(result.rows);
       }
     );
-  })
-}
+  });
+};
 
-
-
-module.exports = { 
+module.exports = {
   getAllAnswers,
   acceptAnswer,
   getAnswerByQuestionId

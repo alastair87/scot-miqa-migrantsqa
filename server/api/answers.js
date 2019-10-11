@@ -1,13 +1,11 @@
 const express = require("express");
-const moment = require("moment");
 const router = express.Router();
 const answerDb = require("../services/database/answers");
-const { authMiddleware } = require("../auth/passport");
 
 //to get the answers by question id
 router.get("/:id", (req, res) => {
   const { id } = req.params;
-  question
+  answerDb
     .getAnswerByQuestionId(id)
     .then(data => {
       res.send(data);
@@ -45,6 +43,5 @@ router.post("/accept-answer", async (req, res, next) => {
       next(err);
     });
 });
-
 
 module.exports = router;
