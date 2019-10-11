@@ -189,8 +189,6 @@ export default class QuestionsList extends Component {
       indexOfFirstQuestion,
       indexOfLastQuestion
     );
-    console.log("=====>>>", currentQuestions);
-
     return (
       <Container>
         {currentQuestions.map((question, index) => {
