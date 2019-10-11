@@ -6,6 +6,7 @@ INSERT INTO users (username,email,password,profile_pic) values ('user','user@cyf
 insert into users (username,email,password,profile_pic) values('reyam','reyam@gmail.com','123455','https://image.flaticon.com/icons/png/512/145/145987.png');
 insert into users (username,email,password,profile_pic) values('ahmed','ahmed@gmail.com','73635','https://www.shareicon.net/download/2016/09/01/822711_user_512x512.png');
 insert into users (username,email,password,profile_pic) values('zan','zan@gmail.com','2516722', 'https://image.flaticon.com/icons/png/512/145/145987.png');
+INSERT INTO users (username,email,password,profile_pic) values ('irina','irinapreda91@gmail.com', 'Miqa123','https://i.ibb.co/8zcwqqn/ymt-ZEu-t-400x400.jpg');
 
 INSERT INTO questions (content,date_posted,tags,is_answered,score,user_id) values('My friend is at risk of eviction, anyone aware of any organisations that can help her in regard to the Serco evictions?','2019-04-11',ARRAY['immigrantion'],false,4,5);
 INSERT INTO questions (content,date_posted,tags,is_answered,score,user_id) values('When interviewing arrivals seeking entry, what questions do UK Immigration offices ask?','2019-03-12',ARRAY['immigrantion'],false,2,4);
