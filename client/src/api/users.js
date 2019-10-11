@@ -3,7 +3,7 @@ export const getUsersDataByUserId = id => {
 };
 
 export const changeProfilePic = ({ newPictureLink, userId }) => {
-  return fetch("/api/users/change-Profile-Pic", {
+  return fetch("/api/users/change-profile-pic", {
     method: "PUT",
     body: JSON.stringify({ newPictureLink, userId }),
     headers: {
