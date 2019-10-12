@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Segment, Form, Dropdown } from "semantic-ui-react";
+import { Container, Segment, Form, Dropdown, Button } from "semantic-ui-react";
 import { postQuestion } from "../api/questions";
 import LoginPrompt from "./LoginPrompt";
 import { tags } from "../util/tag-options";
@@ -50,6 +50,7 @@ export default class AddQuestion extends Component {
       <Container>
         {this.props.userId ? (
           <Form onSubmit={this.handleOnSubmit}>
+            <Button>Add a question</Button>
             <Segment stacked>
               <Form.Input
                 fluid

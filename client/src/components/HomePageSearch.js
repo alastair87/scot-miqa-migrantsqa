@@ -41,25 +41,25 @@ export default class HomePageSearch extends Component {
     return (
       <Container>
         <Dropdown
-          text="Filter Posts"
-          icon="filter"
-          floating
-          labeled
-          button
-          className="icon"
-        />
-        <Dropdown
+          inline
           text="Filter tags"
           multiple
-          icon="filter"
-          button
           floating
           className="icon"
           multiple
           selection
-          style={{ backgroundColor: "grey" }}
           onChange={this.handleSelectedTags}
           options={options}
+        />
+        {"  |   "}
+        <Dropdown
+          inline
+          text="sort by"
+          icon="sort"
+          floating
+          labeled
+          button
+          className="icon"
         />
       </Container>
     );
