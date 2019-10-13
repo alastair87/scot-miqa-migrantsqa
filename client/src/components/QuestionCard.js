@@ -126,8 +126,9 @@ const QuestionCard = props => {
                 <Grid.Column textAlign="right" width={4}>
                   <Card.Meta textAlign="right">
                     <Label as="a" image>
-                      <img src="https://react.semantic-ui.com/images/avatar/small/nan.jpg" />
+                      <img src={question.profile_pic} />
                       {"  "}
+                      {/* {console.log(question.profile_pic)} */}
                       {question.username}
                     </Label>
                   </Card.Meta>
