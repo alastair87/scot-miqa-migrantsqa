@@ -22,7 +22,6 @@ const QuestionCard = props => {
       style={{ padding: "1em" }}
     >
       <Card.Content>
-        <OptionButtonAtQuestionCard link={`/question/${question.id}`} />
         <Card.Header>
           <Accordion>
             <Accordion.Title
@@ -124,7 +123,7 @@ const QuestionCard = props => {
                       )}
                   </Card.Meta>
                 </Grid.Column>
-                <Grid.Column textAlign="right" width={5}>
+                <Grid.Column textAlign="right" width={4}>
                   <Card.Meta textAlign="right">
                     <Label as="a" image>
                       <img src="https://react.semantic-ui.com/images/avatar/small/nan.jpg" />
@@ -132,6 +131,9 @@ const QuestionCard = props => {
                       {question.username}
                     </Label>
                   </Card.Meta>
+                </Grid.Column>
+                <Grid.Column textAlign="right" width={1}>
+                    <OptionButtonAtQuestionCard link={`/question/${question.id}`} />
                 </Grid.Column>
               </Grid>
             </Accordion.Title>
