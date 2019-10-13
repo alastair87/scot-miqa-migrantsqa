@@ -5,16 +5,12 @@ import {
   Form,
   TextArea,
   Accordion,
-  Icon,
-  Popup,
-  Image,
   Grid,
   Label
 } from "semantic-ui-react";
-import { formatingDate } from "../util/formatingDate";
 import AnswersList from "./AnswersList";
 import QuestionUpvote from "./QuestionUpvote";
-import { Link } from "react-router-dom";
+import OptionButtonAtQuestionCard from "./OptionButtonAtQuestionCard";
 
 const QuestionCard = props => {
   const { question, index } = props;
@@ -26,15 +22,6 @@ const QuestionCard = props => {
       style={{ padding: "1em" }}
     >
       <Card.Content>
-        <Popup
-          content="Expand"
-          trigger={
-            <Image floated="right" as={Link} to={`/question/${question.id}`}>
-              {" "}
-              <Icon name="expand" />
-            </Image>
-          }
-        />
         <Card.Header>
           <Accordion>
             <Accordion.Title
@@ -136,7 +123,7 @@ const QuestionCard = props => {
                       )}
                   </Card.Meta>
                 </Grid.Column>
-                <Grid.Column textAlign="right" width={5}>
+                <Grid.Column textAlign="right" width={4}>
                   <Card.Meta textAlign="right">
                     <Label as="a" image>
                       <img src="https://react.semantic-ui.com/images/avatar/small/nan.jpg" />
@@ -144,6 +131,11 @@ const QuestionCard = props => {
                       {question.username}
                     </Label>
                   </Card.Meta>
+                </Grid.Column>
+                <Grid.Column textAlign="right" width={1}>
+                  <OptionButtonAtQuestionCard
+                    link={`/question/${question.id}`}
+                  />
                 </Grid.Column>
               </Grid>
             </Accordion.Title>
