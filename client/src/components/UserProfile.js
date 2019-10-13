@@ -72,6 +72,7 @@ export default class UserProfile extends Component {
         if (result.status === 200) {
           this.getUserData();
           this.close();
+          window.location.reload();
         }
       })
       .catch(err => {
