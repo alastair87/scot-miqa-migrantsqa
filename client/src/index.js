@@ -4,7 +4,6 @@ import "semantic-ui-css/semantic.min.css";
 import "./index.css";
 import Home from "./components/Home";
 import About from "./components/About";
-import Status from "./components/Status";
 import MenuBar from "./components/MenuBar";
 import Register from "./components/UserRegistration";
 import Login from "./components/Login";
@@ -45,7 +44,9 @@ export default class App extends Component {
             <Route path="/about/" component={About} />
             <Route
               path="/change-password"
-              render={props => <ChangePasswordPage userId={this.state.userId} />}
+              render={props => (
+                <ChangePasswordPage userId={this.state.userId} />
+              )}
             />
             <Route path="/register" component={Register} />
             <Route

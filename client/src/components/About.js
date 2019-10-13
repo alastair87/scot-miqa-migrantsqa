@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Header,
-  Divider,
-  Dropdown,
-  Grid,
-  Image,
-  List,
-  Menu,
-  Segment
-} from "semantic-ui-react";
+import { Container, Header } from "semantic-ui-react";
 import "../styles/About.css";
 
 const About = () => {
