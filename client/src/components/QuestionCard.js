@@ -128,7 +128,6 @@ const QuestionCard = props => {
                       <Label as="a" image>
                         <img src={question.profile_pic} />
                         {"  "}
-                        {/* {console.log(question.profile_pic)} */}
                         {question.username}
                       </Label>
                     </Card.Meta>

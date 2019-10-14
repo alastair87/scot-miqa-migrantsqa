@@ -28,7 +28,7 @@ export default class ViewOneQuestion extends Component {
       this.setState({ answers: answers })
     )
     .catch(err => {
-      console.error("HEREEE", err);
+      console.error(err);
     });
   };
   handleOnClickUpvoteBtn = (question, userId) => {
@@ -75,28 +75,28 @@ export default class ViewOneQuestion extends Component {
     const { question, answers, content } = this.state;
     return (
       <Container>
-        <QuestionCard
-        key={question.id}
-        index={question.id}
-        activeIndex={this.props.activeIndex}
-        question={question}
-        userId={this.props.userId}
-        toggleAnswers={this.props.toggleAnswers}
-        editQuestion={this.state.editQuestion}
-        editContentQuestion={this.state.editContentQuestion}
-        handleSaveClick={this.handleSaveClick}
-        onChange={this.handleEditChange}
-        handleCancelClick={this.handleCancelClick}
-        handleEditClick={this.handleEditClick}
-        answers={answers}
-        handleDeleteClick={this.handleDeleteClick}
-        handleChange={this.handleChange}
-        content={this.state.content}
-        handleOnSubmitAnswer={this.handleOnSubmitAnswer}
-        handleOnClickUpvoteBtn={this.handleOnClickUpvoteBtn}
-        handleAcceptAnswerOnClick={this.handleAcceptAnswerOnClick}
-        visibleAnswers={true}
-      />
+            <QuestionCard
+              key={question.id}
+              index={question.id}
+              activeIndex={this.props.activeIndex}
+              question={question}
+              userId={this.props.userId}
+              toggleAnswers={this.props.toggleAnswers}
+              editQuestion={this.state.editQuestion}
+              editContentQuestion={this.state.editContentQuestion}
+              handleSaveClick={this.handleSaveClick}
+              onChange={this.handleEditChange}
+              handleCancelClick={this.handleCancelClick}
+              handleEditClick={this.handleEditClick}
+              answers={answers}
+              handleDeleteClick={this.handleDeleteClick}
+              handleChange={this.handleChange}
+              content={this.state.content}
+              handleOnSubmitAnswer={this.handleOnSubmitAnswer}
+              handleOnClickUpvoteBtn={this.handleOnClickUpvoteBtn}
+              handleAcceptAnswerOnClick={this.handleAcceptAnswerOnClick}
+              visibleAnswers={true}
+            />
       </Container>
     );
   }

@@ -111,7 +111,6 @@ const changeProfilePic = (newPictureLink, userId) => {
         if (error) {
           return reject(error);
         }
-        console.log(result);
         resolve(result.rows);
       }
     );
