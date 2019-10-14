@@ -18,7 +18,6 @@ exports.sendEmail = (recipient, message, attachment) =>
       if (error) {
         return reject(error);
       }
-      console.log(body);
       return resolve(body);
     });
   });

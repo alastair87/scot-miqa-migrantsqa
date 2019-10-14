@@ -48,7 +48,6 @@ const createUser = ({ username, email, password }) => {
         if (error) {
           return reject(error);
         }
-        console.log(result);
         resolve(result.rows);
       }
     );
@@ -91,7 +90,6 @@ const updatePassword = ({ oldPassword, newPassword, email }) => {
               console.error(error);
               return reject(error);
             }
-            console.log(result);
             resolve(result.rows);
           }
         );

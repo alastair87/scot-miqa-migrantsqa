@@ -213,6 +213,7 @@ export default class QuestionsList extends Component {
               handleOnSubmitAnswer={this.handleOnSubmitAnswer}
               handleOnClickUpvoteBtn={this.handleOnClickUpvoteBtn}
               handleAcceptAnswerOnClick={this.handleAcceptAnswerOnClick}
+              visibleAnswers={false}
             />
           );
         })}
