@@ -11,6 +11,7 @@ it("Should render a card", () => {
       ]}
       userId={1}
       tags={["paper"]}
+      visibleAnswers={false}
     />
   );
   expect(getByTestId("cancel-button").textContent).toBe("Cancel");

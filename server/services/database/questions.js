@@ -18,7 +18,8 @@ const getAllQuestions = () => {
         users.username,
         questions.date_posted,
         questions.user_id,
-        questions.score
+        questions.score,
+        users.profile_pic
             FROM  
         questions 
         INNER JOIN users ON users.id = questions.user_id
@@ -178,7 +179,8 @@ const getQuestionByQuestionId = id => {
       questions.date_posted,
       questions.user_id ,
       questions.score,
-      users.username
+      users.username,
+      users.profile_pic
        FROM
       questions 
   INNER JOIN users ON users.id = questions.user_id 

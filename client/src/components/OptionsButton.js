@@ -1,7 +1,11 @@
 import React from "react";
-import { Grid, Header, Dropdown, Icon, Label } from "semantic-ui-react";
+import { Grid, Header, Dropdown, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-export default ({ changePassword }) => {
+export default ({
+  changePassword,
+  ChangeProfilePicture,
+  openPictureAddition
+}) => {
   return (
     <Grid>
       <Grid.Column floated="left" width={6}>
@@ -13,6 +17,12 @@ export default ({ changePassword }) => {
                   <Dropdown.Item as={Link} to="/change-password">
                     <Icon name="lock" color="blue" />
                     Change Password
+                  </Dropdown.Item>
+                )}
+                {ChangeProfilePicture && (
+                  <Dropdown.Item onClick={openPictureAddition}>
+                    <Icon name="edit" color="green" />
+                    Change Profile Picture
                   </Dropdown.Item>
                 )}
               </Dropdown.Menu>

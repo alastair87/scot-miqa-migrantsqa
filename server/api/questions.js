@@ -164,4 +164,19 @@ router.post("/:questionId/answers", authMiddleware, async (req, res, next) => {
     });
 });
 
+// get questions for profile
+router.get("/:id/Profile", (req, res) => {
+  const { id } = req.params;
+  questionDb
+    .getQuestionsByUserId(id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+});
+
+
 module.exports = router;

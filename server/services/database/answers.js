@@ -15,7 +15,6 @@ const getAllAnswers = () => {
           console.error(error);
           reject(error);
         } else {
-          console.log(result);
           resolve(result.rows);
         }
       }
@@ -41,7 +40,6 @@ const acceptAnswer = (questionId, isAccepted, id) => {
               console.error(error);
               return reject(error);
             }
-            console.log(result);
             resolve(result.rows);
           }
         );
@@ -52,7 +50,6 @@ const acceptAnswer = (questionId, isAccepted, id) => {
 
 // get Answers of question By Question id
 const getAnswerByQuestionId = id => {
-  console.log("id", id);
   return new Promise((resolve, reject) => {
     pool.query(
       `SELECT 
@@ -71,7 +68,6 @@ const getAnswerByQuestionId = id => {
           console.error(error);
           return reject(error);
         }
-        console.log(result);
         resolve(result.rows);
       }
     );

@@ -89,7 +89,7 @@ export default class MenuBar extends Component {
                 <Image
                   src={this.state.profilePicUrl}
                   size="mini"
-                  style={{ width: "50px" }}
+                  style={{ maxWidth: "60px", width: "100%" }}
                 />
               ) : (
                 ""

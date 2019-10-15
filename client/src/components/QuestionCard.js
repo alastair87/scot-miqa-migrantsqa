@@ -5,18 +5,15 @@ import {
   Form,
   TextArea,
   Accordion,
-  Icon,
-  Popup,
-  Image,
   Grid,
   Label
 } from "semantic-ui-react";
 import AnswersList from "./AnswersList";
 import QuestionUpvote from "./QuestionUpvote";
-import { Link } from "react-router-dom";
+import OptionButtonAtQuestionCard from "./OptionButtonAtQuestionCard";
 
 const QuestionCard = props => {
-  const { question, index } = props;
+  const { question, index, visibleAnswers } = props;
   return (
     <Card
       data-testid="question"
@@ -25,15 +22,6 @@ const QuestionCard = props => {
       style={{ padding: "1em" }}
     >
       <Card.Content>
-        <Popup
-          content="Expand"
-          trigger={
-            <Image floated="right" as={Link} to={`/question/${question.id}`}>
-              {" "}
-              <Icon name="expand" />
-            </Image>
-          }
-        />
         <Card.Header>
           <Accordion>
             <Accordion.Title
@@ -146,16 +134,30 @@ const QuestionCard = props => {
                 </Grid.Column>
               </Grid>
             </Accordion.Title>
-
-            <AnswersList
-              answers={props.answers}
-              question={question}
-              activeIndex={props.activeIndex}
-              handleOnSubmitAnswer={props.handleOnSubmitAnswer}
-              handleChange={props.handleChange}
-              content={props.content}
-              handleAcceptAnswerOnClick={props.handleAcceptAnswerOnClick}
-            />
+              {
+                visibleAnswers ?
+              <Accordion.Content active={true}>
+                <AnswersList
+                  answers={props.answers}
+                  question={question}
+                  activeIndex={props.activeIndex}
+                  handleOnSubmitAnswer={props.handleOnSubmitAnswer}
+                  handleChange={props.handleChange}
+                  content={props.content}
+                  handleAcceptAnswerOnClick={props.handleAcceptAnswerOnClick}
+                />
+              </Accordion.Content>
+              :
+              <AnswersList
+                answers={props.answers}
+                question={question}
+                activeIndex={props.activeIndex}
+                handleOnSubmitAnswer={props.handleOnSubmitAnswer}
+                handleChange={props.handleChange}
+                content={props.content}
+                handleAcceptAnswerOnClick={props.handleAcceptAnswerOnClick}
+              />
+              }
           </Accordion>
         </Card.Header>
       </Card.Content>
