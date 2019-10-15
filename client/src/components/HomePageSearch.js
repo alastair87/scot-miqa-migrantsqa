@@ -25,21 +25,14 @@ export default class HomePageSearch extends Component {
     });
   }
 
-  updatedTagOptions = () => {
-    const newFilteredTag = [];
-    this.state.filterTags.forEach(tags => {
-      return !newFilteredTag.includes(tags) && newFilteredTag.push(tags);
-    });
-    return newFilteredTag;
-  };
-
   handleSelectedTags = (e, data) => {
     const selectedOptionTags = data.value;
     this.props.getFilteredTags(selectedOptionTags);
   };
 
   render() {
-    const options = this.updatedTagOptions().map((tag, index) => ({
+    const { filterTags } = this.state;
+    const options = filterTags.map((tag, index) => ({
       key: index,
       text: tag,
       value: tag
@@ -48,13 +41,25 @@ export default class HomePageSearch extends Component {
     return (
       <Container>
         <Dropdown
-          placeholder="Filter by tags"
-          fluid
+          inline
+          text="Filter tags"
           multiple
-          search
+          floating
+          className="icon"
+          multiple
           selection
-          options={options}
           onChange={this.handleSelectedTags}
+          options={options}
+        />
+        {"  |   "}
+        <Dropdown
+          inline
+          text="sort by"
+          icon="sort"
+          floating
+          labeled
+          button
+          className="icon"
         />
       </Container>
     );

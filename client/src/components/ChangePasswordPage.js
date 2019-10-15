@@ -93,9 +93,9 @@ class ProfilePage extends Component {
         <Grid centered columns={3}>
           <Grid.Column>
             <Segment>
-            <Header as="h2" textAlign="center" color="brown">
-              Change Password 
-            </Header>
+              <Header as="h2" textAlign="center" color="brown">
+                Change Password
+              </Header>
               {userData ? (
                 <Form size="large">
                   <label>Username</label>
