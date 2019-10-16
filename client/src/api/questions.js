@@ -1,6 +1,4 @@
-export const getQuestions = sortBy => {
-  console.log("Api", sortBy);
-
+export const getQuestions = (sortBy = "date_posted") => {
   return fetch(`/api/questions/?KeyWord=${sortBy}`).then(res => res.json());
 };
 
