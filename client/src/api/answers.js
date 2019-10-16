@@ -32,3 +32,9 @@ export const acceptAnswers = (questionId, isAccepted, id) => {
 export const getAnswersByQuestionId = questionId => {
   return fetch(`/api/answers/${questionId}`).then(res => res.json());
 };
+
+export const deleteAnswer = answerId => {
+  return fetch(`/api/answers/${answerId}`, { method: "DELETE" }).then(res =>
+    res.json()
+  );
+};
