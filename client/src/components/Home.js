@@ -16,13 +16,10 @@ export default class Home extends Component {
     });
   };
   sortType = (e, type) => {
-    console.log("sss", type);
     this.setState({ sortBy: type });
   };
 
   render() {
-    console.log("re", this.state.sortBy);
-
     return (
       <Container>
         <Divider horizontal />
