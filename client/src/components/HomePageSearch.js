@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Dropdown, Container } from "semantic-ui-react";
+import { Dropdown, Grid } from "semantic-ui-react";
 import { getQuestions, getQuestionsTags } from "../api/questions";
-
+import SortTypeMenu from "./SortTypeMenu";
 export default class HomePageSearch extends Component {
   constructor(props) {
     super(props);
@@ -39,29 +39,26 @@ export default class HomePageSearch extends Component {
     }));
 
     return (
-      <Container>
-        <Dropdown
-          inline
-          text="Filter tags"
-          multiple
-          floating
-          className="icon"
-          multiple
-          selection
-          onChange={this.handleSelectedTags}
-          options={options}
-        />
-        {"  |   "}
-        <Dropdown
-          inline
-          text="sort by"
-          icon="sort"
-          floating
-          labeled
-          button
-          className="icon"
-        />
-      </Container>
+      <React.Fragment>
+        <Grid columns={2} divided centered>
+          <Grid.Column textAlign="center">
+            <Dropdown
+              inline
+              text="Filter tags"
+              multiple
+              floating
+              multiple
+              selection
+              onChange={this.handleSelectedTags}
+              options={options}
+            />
+          </Grid.Column>
+          <Grid.Column textAlign="center">
+            {" "}
+            <SortTypeMenu sortType={this.props.sortType}></SortTypeMenu>
+          </Grid.Column>
+        </Grid>
+      </React.Fragment>
     );
   }
 }
