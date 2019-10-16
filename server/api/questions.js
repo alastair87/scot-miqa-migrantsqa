@@ -9,54 +9,54 @@ const { authMiddleware } = require("../auth/passport");
  */
 
 router.get("/questionTags", (req, res) => {
-	questionDb
-		.getQuestionsTags()
-		.then((data) => {
-			res.send(data);
-		})
-		.catch((err) => {
-			res.sendStatus(500);
-		});
+  questionDb
+    .getQuestionsTags()
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.sendStatus(500);
+    });
 });
 // get questions for profile
 router.get("/:id/Profile", (req, res) => {
-	const { id } = req.params;
-	questionDb
-		.getQuestionsByUserId(id)
-		.then((data) => {
-			res.send(data);
-		})
-		.catch((err) => {
-			console.error(err);
-			res.sendStatus(500);
-		});
+  const { id } = req.params;
+  questionDb
+    .getQuestionsByUserId(id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 });
 
 //to get the question by question id
 router.get("/:id([0-9]+)", (req, res) => {
-	const { id } = req.params;
-	questionDb
-		.getQuestionByQuestionId(id)
-		.then((data) => {
-			res.send(data);
-		})
-		.catch((err) => {
-			console.error(err);
-			res.sendStatus(500);
-		});
+  const { id } = req.params;
+  questionDb
+    .getQuestionByQuestionId(id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 });
 
 router.get("/", (req, res) => {
-	const sortBy = req.query.KeyWord;
-	questionDb
-		.getAllQuestions(sortBy)
-		.then((data) => {
-			res.send(data);
-		})
-		.catch((err) => {
-			console.error(err);
-			res.sendStatus(500);
-		});
+  const sortBy = req.query.KeyWord;
+  questionDb
+    .getAllQuestions(sortBy)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 });
 
 /**
@@ -64,71 +64,71 @@ router.get("/", (req, res) => {
  */
 
 router.post("/", authMiddleware, async (req, res, next) => {
-	const { content, tags, isAnswered, score } = req.body;
-	const userId = req.user.id;
-	const datePosted = moment().format();
-	questionDb
-		.insertQuestions(content, datePosted, tags, isAnswered, score, userId)
-		.then(() => {
-			res.send({
-				success: true,
-				message: "Questions inserted"
-			});
-		})
-		.catch((err) => {
-			console.error(err);
-			next(err);
-		});
+  const { content, tags, isAnswered, score } = req.body;
+  const userId = req.user.id;
+  const datePosted = moment().format();
+  questionDb
+    .insertQuestions(content, datePosted, tags, isAnswered, score, userId)
+    .then(() => {
+      res.send({
+        success: true,
+        message: "Questions inserted"
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      next(err);
+    });
 });
 
 router.post("/update-question", async (req, res, next) => {
-	const { content, date_posted, id } = req.body;
+  const { content, date_posted, id } = req.body;
 
-	questionDb
-		.updateQuestions(content, date_posted, id)
-		.then(() => {
-			res.send({
-				success: true,
-				message: "Question updated"
-			});
-		})
-		.catch((err) => {
-			console.error(err);
-			next(err);
-		});
+  questionDb
+    .updateQuestions(content, date_posted, id)
+    .then(() => {
+      res.send({
+        success: true,
+        message: "Question updated"
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      next(err);
+    });
 });
 
 router.put("/update-question-score", async (req, res, next) => {
-	const { score, id } = req.body;
+  const { score, id } = req.body;
 
-	questionDb
-		.updateScore(score, id)
-		.then(() => {
-			res.send({
-				success: true,
-				message: "Score updated"
-			});
-		})
-		.catch((err) => {
-			console.error(err);
-			next(err);
-		});
+  questionDb
+    .updateScore(score, id)
+    .then(() => {
+      res.send({
+        success: true,
+        message: "Score updated"
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      next(err);
+    });
 });
 
 router.delete("/delete-question", async (req, res, next) => {
-	const { id } = req.body;
-	questionDb
-		.deleteQuestions(id)
-		.then(() => {
-			res.send({
-				success: true,
-				message: "Question delete"
-			});
-		})
-		.catch((err) => {
-			console.error(err);
-			next(err);
-		});
+  const { id } = req.body;
+  questionDb
+    .deleteQuestions(id)
+    .then(() => {
+      res.send({
+        success: true,
+        message: "Question delete"
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      next(err);
+    });
 });
 
 // /**
@@ -136,47 +136,47 @@ router.delete("/delete-question", async (req, res, next) => {
 //  */
 
 router.post("/:questionId/answers", authMiddleware, async (req, res, next) => {
-	const { content, tags } = req.body;
-	const userId = req.user.id;
-	const dateAnswered = moment().format();
-	const isAccepted = false;
-	const questionId = parseInt(req.params.questionId);
-	//TODO score here must be changed
-	const score = 4;
-	questionDb
-		.insertAnswer(
-			content,
-			dateAnswered,
-			tags,
-			isAccepted,
-			score,
-			questionId,
-			userId
-		)
-		.then(() => {
-			res.send({
-				success: true,
-				message: "Answer inserted"
-			});
-		})
-		.catch((err) => {
-			console.error(err);
-			next(err);
-		});
+  const { content, tags } = req.body;
+  const userId = req.user.id;
+  const dateAnswered = moment().format();
+  const isAccepted = false;
+  const questionId = parseInt(req.params.questionId);
+  //TODO score here must be changed
+  const score = 4;
+  questionDb
+    .insertAnswer(
+      content,
+      dateAnswered,
+      tags,
+      isAccepted,
+      score,
+      questionId,
+      userId
+    )
+    .then(() => {
+      res.send({
+        success: true,
+        message: "Answer inserted"
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      next(err);
+    });
 });
 
 // get questions for profile
 router.get("/:id/Profile", (req, res) => {
-	const { id } = req.params;
-	questionDb
-		.getQuestionsByUserId(id)
-		.then((data) => {
-			res.send(data);
-		})
-		.catch((err) => {
-			console.error(err);
-			res.sendStatus(500);
-		});
+  const { id } = req.params;
+  questionDb
+    .getQuestionsByUserId(id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;
