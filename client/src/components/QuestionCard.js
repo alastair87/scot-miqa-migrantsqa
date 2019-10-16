@@ -116,28 +116,29 @@ const QuestionCard = props => {
                         (tag, index) =>
                           //This line will add a #followed by the tag and
                           //keep adding spaces till we reach the end of the array.
-                            `#${tag}${
-                              index === question.tags.length - 1 ? "" : ` `
-                            }`
-                        )}
-                    </Card.Meta>
-                  </Grid.Column>
-                  <Grid.Column textAlign="right" width={4}>
-                    <Card.Meta textAlign="right">
-                      <Label as="a" image>
-                        <img src={question.profile_pic} />
-                        {"  "}
-                        {question.username}
-                      </Label>
-                    </Card.Meta>
+                          `#${tag}${
+                            index === question.tags.length - 1 ? "" : ` `
+                          }`
+                      )}
+                  </Card.Meta>
+                </Grid.Column>
+                <Grid.Column textAlign="right" width={4}>
+                  <Card.Meta textAlign="right">
+                    <Label as="a" image>
+                      <img src={question.profile_pic} />
+                      {"  "}
+                      {question.username}
+                    </Label>
+                  </Card.Meta>
                 </Grid.Column>
                 <Grid.Column textAlign="right" width={1}>
-                    <OptionButtonAtQuestionCard link={`/question/${question.id}`} />
+                  <OptionButtonAtQuestionCard
+                    link={`/question/${question.id}`}
+                  />
                 </Grid.Column>
               </Grid>
             </Accordion.Title>
-              {
-                visibleAnswers ?
+            {visibleAnswers ? (
               <Accordion.Content active={true}>
                 <AnswersList
                   answers={props.answers}
@@ -147,9 +148,11 @@ const QuestionCard = props => {
                   handleChange={props.handleChange}
                   content={props.content}
                   handleAcceptAnswerOnClick={props.handleAcceptAnswerOnClick}
+                  clickToDeleteAnswer={props.clickToDeleteAnswer}
+                  userId={this.props.userId}
                 />
               </Accordion.Content>
-              :
+            ) : (
               <AnswersList
                 answers={props.answers}
                 question={question}
@@ -158,8 +161,10 @@ const QuestionCard = props => {
                 handleChange={props.handleChange}
                 content={props.content}
                 handleAcceptAnswerOnClick={props.handleAcceptAnswerOnClick}
+                clickToDeleteAnswer={props.clickToDeleteAnswer}
+                userId={props.userId}
               />
-              }
+            )}
           </Accordion>
         </Card.Header>
       </Card.Content>
