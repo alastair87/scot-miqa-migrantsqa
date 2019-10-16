@@ -39,7 +39,6 @@ export default class HomePageSearch extends Component {
     }));
 
     return (
-      <React.Fragment>
         <Grid columns={2} divided centered>
           <Grid.Column textAlign="center">
             <Dropdown
@@ -58,7 +57,6 @@ export default class HomePageSearch extends Component {
             <SortTypeMenu sortType={this.props.sortType}></SortTypeMenu>
           </Grid.Column>
         </Grid>
-      </React.Fragment>
     );
   }
 }
