@@ -5,6 +5,7 @@ import { acceptAnswers } from "../api/answers";
 import QuestionCard from "./QuestionCard";
 import { sendNotificationEmail } from "../api/sendEmail";
 import { getUsersDataByUserId } from "../api/users";
+import { deleteAnswer } from "../api/answers";
 
 export default class QuestionsList extends Component {
   constructor(props) {
@@ -179,6 +180,17 @@ export default class QuestionsList extends Component {
 
   handlePaginationChange = (e, { activePage }) =>
     this.setState({ currentPage: activePage });
+
+  clickToDeleteAnswer = (e, answerId) => {
+    deleteAnswer(answerId)
+      .then(result => {
+        if (result.success) {
+          this.props.pageReload();
+        }
+      })
+      .catch(err => {});
+  };
+
   render() {
     const { currentPage, questionsPerPage } = this.state;
 
@@ -189,6 +201,7 @@ export default class QuestionsList extends Component {
       indexOfFirstQuestion,
       indexOfLastQuestion
     );
+
     return (
       <Container>
         {currentQuestions.map((question, index) => {
@@ -214,6 +227,7 @@ export default class QuestionsList extends Component {
               handleOnClickUpvoteBtn={this.handleOnClickUpvoteBtn}
               handleAcceptAnswerOnClick={this.handleAcceptAnswerOnClick}
               visibleAnswers={false}
+              clickToDeleteAnswer={this.clickToDeleteAnswer}
             />
           );
         })}
