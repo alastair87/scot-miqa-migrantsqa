@@ -10,7 +10,8 @@ export default class AddQuestion extends Component {
     tags,
     isAnswered: null,
     score: 0,
-    userId: ""
+    userId: "",
+    currentValues: null
   };
 
   handleAddition = (e, { value }) => {
@@ -35,7 +36,8 @@ export default class AddQuestion extends Component {
         if (result.status === 200) {
           this.props.pageReload();
           this.setState({
-            content: ""
+            content: "",
+            currentValues: null
           });
         }
       })
@@ -67,8 +69,8 @@ export default class AddQuestion extends Component {
                 options={this.state.tags}
                 placeholder="Add Tags"
                 search
-                selection
                 fluid
+                selection
                 multiple
                 allowAdditions
                 value={currentValues}
