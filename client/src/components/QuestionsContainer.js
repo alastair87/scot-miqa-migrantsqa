@@ -29,7 +29,7 @@ export default class QuestionsContainer extends Component {
   };
 
   pageReload = () => {
-    getQuestions().then(res => {
+    getQuestions(this.props.sortBy).then(res => {
       this.setState({
         questions: res,
         tags: this.props.tags,
@@ -61,6 +61,8 @@ export default class QuestionsContainer extends Component {
   };
 
   render() {
+    console.log("questions", this.props.sortBy);
+
     return this.state.IsLoading ? (
       <Loader />
     ) : (
