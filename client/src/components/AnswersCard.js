@@ -11,6 +11,7 @@ const AnswersCard = props => {
         {props.userId && answer.user_id === props.userId && (
           <Card.Content textAlign="right">
             <Icon
+              className="pointer"
               name="trash alternate"
               textAlign="right"
               color="red"
