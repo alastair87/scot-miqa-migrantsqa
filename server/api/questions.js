@@ -48,9 +48,6 @@ router.get("/:id([0-9]+)", (req, res) => {
 
 router.get("/", (req, res) => {
 	const sortBy = req.query.KeyWord;
-
-	console.log("Api", sortBy);
-
 	questionDb
 		.getAllQuestions(sortBy)
 		.then((data) => {
