@@ -1,7 +1,7 @@
 import React from "react";
 import { Dropdown, Icon } from "semantic-ui-react";
 
-export default props => {
+export const SortTypeMenu = props => {
   return (
     <Dropdown
       item

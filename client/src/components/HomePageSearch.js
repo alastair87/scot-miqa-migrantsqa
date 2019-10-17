@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Dropdown, Grid } from "semantic-ui-react";
 import { getQuestions, getQuestionsTags } from "../api/questions";
-import SortTypeMenu from "./SortTypeMenu";
+import { SortTypeMenu } from "./SortTypeMenu";
 export default class HomePageSearch extends Component {
   constructor(props) {
     super(props);
