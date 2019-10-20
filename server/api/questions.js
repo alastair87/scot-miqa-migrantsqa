@@ -47,8 +47,9 @@ router.get("/:id([0-9]+)", (req, res) => {
 });
 
 router.get("/", (req, res) => {
+  const sortBy = req.query.KeyWord;
   questionDb
-    .getAllQuestions()
+    .getAllQuestions(sortBy)
     .then(data => {
       res.send(data);
     })
@@ -177,6 +178,5 @@ router.get("/:id/Profile", (req, res) => {
       res.sendStatus(500);
     });
 });
-
 
 module.exports = router;

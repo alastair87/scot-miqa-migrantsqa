@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Header, Dropdown, Icon } from "semantic-ui-react";
+import { Dropdown, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 export default ({ link }) => {

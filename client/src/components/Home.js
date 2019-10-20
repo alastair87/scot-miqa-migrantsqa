@@ -6,7 +6,8 @@ import QuestionsContainer from "./QuestionsContainer";
 
 export default class Home extends Component {
   state = {
-    tags: []
+    tags: [],
+    sortBy: "date_posted"
   };
 
   getFilteredTags = tags => {
@@ -14,14 +15,24 @@ export default class Home extends Component {
       tags
     });
   };
+  sortType = (e, type) => {
+    this.setState({ sortBy: type });
+  };
 
   render() {
     return (
       <Container>
         <Divider horizontal />
-        <HomePageSearch getFilteredTags={this.getFilteredTags} />
+        <HomePageSearch
+          getFilteredTags={this.getFilteredTags}
+          sortType={this.sortType}
+        />
         <Divider horizontal />
-        <QuestionsContainer tags={this.state.tags} userId={this.props.userId} />
+        <QuestionsContainer
+          tags={this.state.tags}
+          userId={this.props.userId}
+          sortBy={this.state.sortBy}
+        />
       </Container>
     );
   }

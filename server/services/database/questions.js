@@ -8,7 +8,7 @@ const pool = new Pool(config);
  * security risk to expose all users
  */
 
-const getAllQuestions = () => {
+const getAllQuestions = sortBy => {
   return new Promise((resolve, reject) => {
     pool.query(
       `SELECT  
@@ -23,7 +23,7 @@ const getAllQuestions = () => {
             FROM  
         questions 
         INNER JOIN users ON users.id = questions.user_id
-        ORDER BY questions.date_posted DESC`,
+		ORDER BY questions.${sortBy} DESC`,
       (error, result) => {
         if (error) {
           console.error(error);
