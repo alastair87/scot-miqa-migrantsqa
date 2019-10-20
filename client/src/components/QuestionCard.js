@@ -149,6 +149,8 @@ const QuestionCard = props => {
                   handleChange={props.handleChange}
                   content={props.content}
                   handleAcceptAnswerOnClick={props.handleAcceptAnswerOnClick}
+                  clickToDeleteAnswer={props.clickToDeleteAnswer}
+                  userId={this.props.userId}
                 />
               </Accordion.Content>
             ) : (
@@ -161,6 +163,8 @@ const QuestionCard = props => {
                 handleChange={props.handleChange}
                 content={props.content}
                 handleAcceptAnswerOnClick={props.handleAcceptAnswerOnClick}
+                clickToDeleteAnswer={props.clickToDeleteAnswer}
+                userId={props.userId}
               />
             )}
           </Accordion>

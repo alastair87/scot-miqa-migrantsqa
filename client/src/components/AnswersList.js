@@ -23,6 +23,8 @@ const AnswersList = props => {
             question={question}
             answer={answer}
             handleAcceptAnswerOnClick={handleAcceptAnswerOnClick}
+            clickToDeleteAnswer={props.clickToDeleteAnswer}
+            userId={props.userId}
           />
         );
       })}
