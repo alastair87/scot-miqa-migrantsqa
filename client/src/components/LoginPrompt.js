@@ -2,8 +2,8 @@ import React from "react";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-const LoginPrompt = () => (
-  <Modal trigger={<Button>Add a question </Button>} basic size="small">
+const LoginPrompt = props => (
+  <Modal basic size="small" open={props.modalOpen} onClose={props.handleClose}>
     <Header icon="warning" content="Adding a question" />
     <Modal.Content>
       <p>Please Register/Login to add a question.</p>

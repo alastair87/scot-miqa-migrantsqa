@@ -19,7 +19,8 @@ export default class AddQuestion extends Component {
     isAnswered: null,
     score: 0,
     userId: "",
-    currentValues: null
+    currentValues: null,
+    modalOpen: false
   };
 
   handleAddition = (e, { value }) => {
@@ -53,24 +54,26 @@ export default class AddQuestion extends Component {
         console.error(err);
       });
   };
+  handleOpen = () => this.setState({ modalOpen: true });
 
+  handleClose = () => this.setState({ modalOpen: false });
   render() {
     const { content, currentValues } = this.state;
     return (
       <Container>
-        {this.props.userId ? (
-          <Form onSubmit={this.handleOnSubmit}>
-            <Grid columns={2}>
-              <Grid.Column floated="left">
-                <Button>Add a question</Button>
-              </Grid.Column>
-              <Grid.Column floated="right" textAlign="right">
-                <HomePageSearch
-                  getFilteredTags={this.props.getFilteredTags}
-                  sortType={this.props.sortType}
-                ></HomePageSearch>
-              </Grid.Column>
-            </Grid>
+        <Form onSubmit={this.handleOnSubmit}>
+          <Grid columns={2}>
+            <Grid.Column floated="left">
+              <Button onClick={this.handleOpen}>Add a question</Button>
+            </Grid.Column>
+            <Grid.Column floated="right" textAlign="right">
+              <HomePageSearch
+                getFilteredTags={this.props.getFilteredTags}
+                sortType={this.props.sortType}
+              ></HomePageSearch>
+            </Grid.Column>
+          </Grid>
+          {this.props.userId ? (
             <Segment stacked>
               <Form.Input
                 fluid
@@ -96,10 +99,14 @@ export default class AddQuestion extends Component {
                 onChange={this.handleChangeTag}
               />
             </Segment>
-          </Form>
-        ) : (
-          <LoginPrompt />
-        )}
+          ) : (
+            <LoginPrompt
+              handleOpen={this.handleOpen}
+              handleClose={this.handleClose}
+              modalOpen={this.state.modalOpen}
+            />
+          )}
+        </Form>
       </Container>
     );
   }
