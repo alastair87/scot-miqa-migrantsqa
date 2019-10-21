@@ -1,8 +1,16 @@
 import React, { Component } from "react";
-import { Container, Segment, Form, Dropdown, Button } from "semantic-ui-react";
+import {
+  Container,
+  Segment,
+  Form,
+  Dropdown,
+  Button,
+  Grid
+} from "semantic-ui-react";
 import { postQuestion } from "../api/questions";
 import LoginPrompt from "./LoginPrompt";
 import { tags } from "../util/tag-options";
+import HomePageSearch from "./HomePageSearch";
 
 export default class AddQuestion extends Component {
   state = {
@@ -52,7 +60,17 @@ export default class AddQuestion extends Component {
       <Container>
         {this.props.userId ? (
           <Form onSubmit={this.handleOnSubmit}>
-            <Button>Add a question</Button>
+            <Grid columns={2}>
+              <Grid.Column floated="left">
+                <Button>Add a question</Button>
+              </Grid.Column>
+              <Grid.Column floated="right" textAlign="right">
+                <HomePageSearch
+                  getFilteredTags={this.props.getFilteredTags}
+                  sortType={this.props.sortType}
+                ></HomePageSearch>
+              </Grid.Column>
+            </Grid>
             <Segment stacked>
               <Form.Input
                 fluid

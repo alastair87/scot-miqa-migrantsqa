@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Dropdown, Grid } from "semantic-ui-react";
+import { Dropdown } from "semantic-ui-react";
 import { getQuestions, getQuestionsTags } from "../api/questions";
 import { SortTypeMenu } from "./SortTypeMenu";
+
 export default class HomePageSearch extends Component {
   constructor(props) {
     super(props);
@@ -39,24 +40,18 @@ export default class HomePageSearch extends Component {
     }));
 
     return (
-        <Grid columns={2} divided centered>
-          <Grid.Column textAlign="center">
-            <Dropdown
-              inline
-              text="Filter tags"
-              multiple
-              floating
-              multiple
-              selection
-              onChange={this.handleSelectedTags}
-              options={options}
-            />
-          </Grid.Column>
-          <Grid.Column textAlign="center">
-            {" "}
-            <SortTypeMenu sortType={this.props.sortType}></SortTypeMenu>
-          </Grid.Column>
-        </Grid>
+      <React.Fragment>
+        <Dropdown
+          style={{ backgroundColor: "lightGrey" }}
+          text="Filter tags"
+          multiple
+          clearable
+          selection
+          onChange={this.handleSelectedTags}
+          options={options}
+        />{" "}
+        <SortTypeMenu sortType={this.props.sortType}></SortTypeMenu>
+      </React.Fragment>
     );
   }
 }

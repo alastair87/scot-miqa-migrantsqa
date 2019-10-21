@@ -1,17 +1,16 @@
 import React from "react";
-import { Dropdown, Icon } from "semantic-ui-react";
+import { Dropdown, Icon, Menu } from "semantic-ui-react";
 
 export const SortTypeMenu = props => {
   return (
     <Dropdown
-      item
+      style={{ backgroundColor: "lightGrey" }}
       size="small"
-      inline
       text="Sort Questions "
-      icon="sort"
       labeled
-      button
-      className="icon"
+      multiple
+      clearable
+      selection
     >
       <Dropdown.Menu>
         <Dropdown.Item onClick={e => props.sortType(e, "score")}>
