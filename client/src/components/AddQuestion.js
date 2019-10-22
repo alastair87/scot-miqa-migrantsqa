@@ -20,7 +20,8 @@ export default class AddQuestion extends Component {
     score: 0,
     userId: "",
     currentValues: null,
-    modalOpen: false
+    modalOpen: false,
+    ShowQuestion: false
   };
 
   handleAddition = (e, { value }) => {
@@ -54,6 +55,9 @@ export default class AddQuestion extends Component {
         console.error(err);
       });
   };
+  ShowQuestion = () => {
+    this.setState({ ShowQuestion: true });
+  };
   handleOpen = () => this.setState({ modalOpen: true });
 
   handleClose = () => this.setState({ modalOpen: false });
@@ -64,7 +68,13 @@ export default class AddQuestion extends Component {
         <Form onSubmit={this.handleOnSubmit}>
           <Grid columns={2}>
             <Grid.Column floated="left">
-              <Button onClick={this.handleOpen}>Add a question</Button>
+              <Button
+                onClick={
+                  this.props.userId ? this.ShowQuestion : this.handleOpen
+                }
+              >
+                Add a question
+              </Button>
             </Grid.Column>
             <Grid.Column floated="right" textAlign="right">
               <HomePageSearch
@@ -73,7 +83,7 @@ export default class AddQuestion extends Component {
               ></HomePageSearch>
             </Grid.Column>
           </Grid>
-          {this.props.userId ? (
+          {this.props.userId && this.state.ShowQuestion ? (
             <Segment stacked>
               <Form.Input
                 fluid
