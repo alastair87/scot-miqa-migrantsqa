@@ -1,8 +1,16 @@
 import React, { Component } from "react";
-import { Container, Segment, Form, Dropdown, Button } from "semantic-ui-react";
+import {
+  Container,
+  Segment,
+  Form,
+  Dropdown,
+  Button,
+  Grid
+} from "semantic-ui-react";
 import { postQuestion } from "../api/questions";
 import LoginPrompt from "./LoginPrompt";
 import { tags } from "../util/tag-options";
+import HomePageSearch from "./HomePageSearch";
 
 export default class AddQuestion extends Component {
   state = {
@@ -11,7 +19,9 @@ export default class AddQuestion extends Component {
     isAnswered: null,
     score: 0,
     userId: "",
-    currentValues: null
+    currentValues: null,
+    modalOpen: false,
+    ShowQuestion: false
   };
 
   handleAddition = (e, { value }) => {
@@ -45,14 +55,35 @@ export default class AddQuestion extends Component {
         console.error(err);
       });
   };
+  ShowQuestion = () => {
+    this.setState({ ShowQuestion: true });
+  };
+  handleOpen = () => this.setState({ modalOpen: true });
 
+  handleClose = () => this.setState({ modalOpen: false });
   render() {
     const { content, currentValues } = this.state;
     return (
       <Container>
-        {this.props.userId ? (
-          <Form onSubmit={this.handleOnSubmit}>
-            <Button>Add a question</Button>
+        <Form onSubmit={this.handleOnSubmit}>
+          <Grid columns={2}>
+            <Grid.Column floated="left">
+              <Button
+                onClick={
+                  this.props.userId ? this.ShowQuestion : this.handleOpen
+                }
+              >
+                Add a question
+              </Button>
+            </Grid.Column>
+            <Grid.Column floated="right" textAlign="right">
+              <HomePageSearch
+                getFilteredTags={this.props.getFilteredTags}
+                sortType={this.props.sortType}
+              ></HomePageSearch>
+            </Grid.Column>
+          </Grid>
+          {this.props.userId && this.state.ShowQuestion ? (
             <Segment stacked>
               <Form.Input
                 fluid
@@ -78,10 +109,14 @@ export default class AddQuestion extends Component {
                 onChange={this.handleChangeTag}
               />
             </Segment>
-          </Form>
-        ) : (
-          <LoginPrompt />
-        )}
+          ) : (
+            <LoginPrompt
+              handleOpen={this.handleOpen}
+              handleClose={this.handleClose}
+              modalOpen={this.state.modalOpen}
+            />
+          )}
+        </Form>
       </Container>
     );
   }

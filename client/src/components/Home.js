@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../styles/Home.css";
-import HomePageSearch from "./HomePageSearch";
-import { Container, Divider } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import QuestionsContainer from "./QuestionsContainer";
 
 export default class Home extends Component {
@@ -22,14 +21,10 @@ export default class Home extends Component {
   render() {
     return (
       <Container>
-        <Divider horizontal />
-        <HomePageSearch
-          getFilteredTags={this.getFilteredTags}
-          sortType={this.sortType}
-        />
-        <Divider horizontal />
         <QuestionsContainer
           tags={this.state.tags}
+          getFilteredTags={this.getFilteredTags}
+          sortType={this.sortType}
           userId={this.props.userId}
           sortBy={this.state.sortBy}
         />

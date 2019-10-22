@@ -71,7 +71,12 @@ export default class QuestionsContainer extends Component {
       <Loader />
     ) : (
       <Container>
-        <AddQuestion pageReload={this.pageReload} userId={this.props.userId} />
+        <AddQuestion
+          getFilteredTags={this.props.getFilteredTags}
+          sortType={this.props.sortType}
+          pageReload={this.pageReload}
+          userId={this.props.userId}
+        />
         <Divider />
         <QuestionsList
           pageReload={this.pageReload}
