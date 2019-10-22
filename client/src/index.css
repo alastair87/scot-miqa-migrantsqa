@@ -20,3 +20,9 @@ body {
 .top-content {
   flex: 1;
 }
+
+.ui.multiple.dropdown {
+  line-height: 2.1em;
+  border: none !important;
+  min-width: 13em;
+}
