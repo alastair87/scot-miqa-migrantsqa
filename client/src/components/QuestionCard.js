@@ -124,10 +124,10 @@ const QuestionCard = props => {
                 </Grid.Column>
                 <Grid.Column textAlign="right" width={4}>
                   <Card.Meta textAlign="right">
-                    <Label as="a" image>
-                      <img src={question.profile_pic} />
-                      {"  "}
+                    <Label as="a" image style={{paddingRight:'0', minWidth:'90px', textAlign:'left', fontSize:'0.8em'}}>
                       {question.username}
+                      {" "}
+                      <img src={question.profile_pic} style={{float:'right'}}/>
                     </Label>
                   </Card.Meta>
                 </Grid.Column>
