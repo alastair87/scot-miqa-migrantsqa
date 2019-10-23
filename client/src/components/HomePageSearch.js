@@ -46,6 +46,7 @@ export default class HomePageSearch extends Component {
           text="Filter tags"
           multiple
           clearable
+          search
           selection
           onChange={this.handleSelectedTags}
           options={options}
