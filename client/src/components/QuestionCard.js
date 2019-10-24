@@ -47,7 +47,11 @@ const QuestionCard = props => {
                         answer => answer.question_id === question.id
                       ).length
                     }{" "}
-                    answers
+                    {
+                      props.answers.filter(
+                        answer => answer.question_id === question.id
+                      ).length == 1 ? "answer" : "answers"
+                    }
                   </Card.Meta>
                 </Grid.Column>
                 <Grid.Column textAlign="left" width={9}>
