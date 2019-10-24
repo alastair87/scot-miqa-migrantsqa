@@ -71,10 +71,7 @@ export default class MenuBar extends Component {
   };
 
   render() {
-    const isDesktop = this.state.isDesktop;
-
-    // const { activeItem } = this.state;
-    const { activeItem, visible, profilePicUrl } = this.state;
+    const { activeItem, visible, profilePicUrl, isDesktop, handleItemClick } = this.state;
     return (
       <>
         {isDesktop ?
@@ -116,15 +113,21 @@ export default class MenuBar extends Component {
                     position="right"
                     onClick={this.handleLogout}
                   />
-                  {this.props.userId ? (
-                    <Image
-                      src={this.state.profilePicUrl}
-                      size="mini"
-                      style={{ maxWidth: "60px", width: "100%" }}
-                    />
-                  ) : (
-                      ""
-                    )}
+                  <Menu.Item
+                    onClick={this.handleItemClick}
+                    as={Link}
+                    to="/profile"
+                  >
+                    {this.props.userId ? (
+                      <Image
+                        src={this.state.profilePicUrl}
+                        size="mini"
+                        style={{ maxWidth: "60px", width: "100%" }}
+                      />
+                    ) : (
+                        ""
+                      )}
+                  </Menu.Item>
                 </Menu.Menu>
               ) : (
                   <Menu.Menu position="right">
@@ -157,11 +160,6 @@ export default class MenuBar extends Component {
             style={{ height: "60px" }}
           >
             <Container>
-              <Responsive maxWidth={999}>
-                <Menu.Item position="left">
-                  <Icon name="bars" onClick={this.handleShowClick} />
-                </Menu.Item>
-              </Responsive>
               <Menu.Item>
                 <Image
                   src={logo}
@@ -171,6 +169,28 @@ export default class MenuBar extends Component {
                   style={{ width: "75px" }}
                 />
               </Menu.Item>
+              <Menu.Menu position="right">
+                <Menu.Item
+                  position="right"
+                  onClick={this.handleItemClick}
+                  as={Link}
+                  to="/profile"
+                >
+                  {this.props.userId && (
+                    <Image
+                      src={profilePicUrl}
+                      size="mini"
+                      style={{ height: "45px", width: "45px" }}
+                    />
+                  )}
+                </Menu.Item>
+                <Menu.Item position="right">
+                  <Responsive maxWidth={999}>
+                    <Icon name="bars" onClick={this.handleShowClick} />
+                  </Responsive>
+                </Menu.Item>
+              </Menu.Menu>
+
               <Responsive as={Menu} inverted minWidth={1000}>
                 <MenuItems
                   activeItem={activeItem}
@@ -180,17 +200,6 @@ export default class MenuBar extends Component {
                   profilePicUrl={profilePicUrl}
                 />
               </Responsive>
-              {this.props.userId && (
-                <Menu.Menu position="right">
-                  <Menu.Item position="right">
-                    <Image
-                      src={profilePicUrl}
-                      size="mini"
-                      style={{ height: "45px" }}
-                    />
-                  </Menu.Item>
-                </Menu.Menu>
-              )}
 
               <SideBar
                 userId={this.props.userId}

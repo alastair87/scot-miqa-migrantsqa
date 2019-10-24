@@ -14,6 +14,7 @@ export const SideBar = ({
     <Sidebar
       as={Menu}
       animation="overlay"
+      direction="right"
       icon="labeled"
       inverted
       vertical
