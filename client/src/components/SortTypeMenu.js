@@ -3,7 +3,8 @@ import { Dropdown, Icon, Menu } from "semantic-ui-react";
 
 export const SortTypeMenu = props => {
   return (
-    <Dropdown
+    <Dropdown  
+      className="sort"
       style={{ backgroundColor: "lightGrey" }}
       size="small"
       text="Sort Questions "

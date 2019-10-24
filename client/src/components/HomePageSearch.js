@@ -50,6 +50,7 @@ export default class HomePageSearch extends Component {
           selection
           onChange={this.handleSelectedTags}
           options={options}
+          className="filter"
         />{" "}
         <SortTypeMenu sortType={this.props.sortType}></SortTypeMenu>
       </React.Fragment>

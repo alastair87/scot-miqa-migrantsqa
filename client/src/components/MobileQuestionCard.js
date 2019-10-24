@@ -12,14 +12,14 @@ import AnswersList from "./AnswersList";
 import QuestionUpvote from "./QuestionUpvote";
 import OptionButtonAtQuestionCard from "./OptionButtonAtQuestionCard";
 
-const QuestionCard = props => {
+const MobileQuestionCard = props => {
   const { question, index, visibleAnswers } = props;
   return (
     <Card
       data-testid="question"
       fluid
       key={question.id}
-      style={{ padding: "1em" }}
+      style={{ padding: "0.1em" }}
     >
       <Card.Content>
         <Card.Header>
@@ -30,8 +30,8 @@ const QuestionCard = props => {
               onClick={props.toggleAnswers}
               id={`card-${index}`}
             >
-              <Grid columns={3}>
-                <Grid.Column textAlign="left" width={2}>
+              <Grid columns={2}>
+                <Grid.Column textAlign="left" width={5}>
                   <QuestionUpvote
                     userId={props.userId}
                     questionUserId={question.user_id}
@@ -41,10 +41,10 @@ const QuestionCard = props => {
                       props.handleOnClickUpvoteBtn(question, props.userId)
                     }
                   />
-                  <Card.Meta style={{ fontSize: "0.9em" }}>
+                  <Card.Meta style={{ fontSize: "0.8em" }}>
                     {question.score} Likes
                   </Card.Meta>
-                  <Card.Meta style={{ fontSize: "0.9em" }}>
+                  <Card.Meta style={{ fontSize: "0.8em" }}>
                     {
                       props.answers.filter(
                         answer => answer.question_id === question.id
@@ -57,7 +57,7 @@ const QuestionCard = props => {
                     }
                   </Card.Meta>
                 </Grid.Column>
-                <Grid.Column textAlign="left" width={9}>
+                <Grid.Column textAlign="left" width={11}>
                   {props.editQuestion &&
                   props.editQuestion.id === question.id ? (
                     <Form>
@@ -66,7 +66,7 @@ const QuestionCard = props => {
                         style={{ minHeight: 100 }}
                         onChange={e => props.onChange(e)}
                       />
-                      <div className="ui two buttons" style={{ width: "40%" }}>
+                      <div className="ui two buttons">
                         <Button
                           onClick={props.handleSaveClick}
                           basic
@@ -89,7 +89,7 @@ const QuestionCard = props => {
                   )}
                   {props.userId === question.user_id && !props.editQuestion ? (
                     <Card.Content extra>
-                      <div className="ui two buttons" style={{ width: "40%" }}>
+                      <div className="ui two buttons">
                         <Button
                           basic
                           color="black"
@@ -129,32 +129,34 @@ const QuestionCard = props => {
                       )}
                   </Card.Meta>
                 </Grid.Column>
-                <Grid.Column textAlign="right" width={4}>
-                  <Card.Meta textAlign="right">
-                    <Label
-                      as="a"
-                      image
-                      style={{
-                        paddingRight: "0",
-                        minWidth: "90px",
-                        textAlign: "left",
-                        fontSize: "0.8em"
-                      }}
-                    >
-                      {question.username}{" "}
-                      <img
-                        src={question.profile_pic}
-                        style={{ float: "right" }}
-                      />
-                    </Label>
-                  </Card.Meta>
-                </Grid.Column>
-                <Grid.Column textAlign="right" width={1}>
-                  <OptionButtonAtQuestionCard
-                    link={`/question/${question.id}`}
-                  />
-                </Grid.Column>
-              </Grid>
+                </Grid>
+                <Grid columns={2}>
+                  <Grid.Column textAlign="left" width={8}>
+                    <OptionButtonAtQuestionCard
+                      link={`/question/${question.id}`}
+                    />
+                  </Grid.Column>
+                  <Grid.Column textAlign="right" width={8}>
+                    <Card.Meta textAlign="right">
+                      <Label
+                        as="a"
+                        image
+                        style={{
+                          paddingRight: "0",
+                          minWidth: "90px",
+                          textAlign: "left",
+                          fontSize: "0.8em"
+                        }}
+                      >
+                        {question.username}{" "}
+                        <img
+                          src={question.profile_pic}
+                          style={{ float: "right" }}
+                        />
+                      </Label>
+                    </Card.Meta>
+                  </Grid.Column>
+                </Grid>
             </Accordion.Title>
             {visibleAnswers ? (
               <Accordion.Content active={true}>
@@ -192,4 +194,4 @@ const QuestionCard = props => {
   );
 };
 
-export default QuestionCard;
+export default MobileQuestionCard;
