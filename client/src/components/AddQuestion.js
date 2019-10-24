@@ -67,8 +67,8 @@ export default class AddQuestion extends Component {
       <Container>
         <Form onSubmit={this.handleOnSubmit}>
           <Grid columns={2}>
-            <Grid.Column floated="left">
-              <Button className="add-question"
+            <Grid.Column floated="left" className="add-question">
+              <Button className="add-question-btn"
                 onClick={
                   this.props.userId ? this.ShowQuestion : this.handleOpen
                 }

@@ -31,6 +31,10 @@ body {
   }
 
   .add-question{
-    width: 80vw !important;
+    width: 100vw !important;
+  }
+
+  .add-question-btn{
+    width: 100% !important;
   }
 }
